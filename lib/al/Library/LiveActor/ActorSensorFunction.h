@@ -6,32 +6,6 @@
 
 namespace al {
 
-enum SensorType {
-    SensorType_Eye = 0,
-    SensorType_Player = 1,
-    SensorType_PlayerAttack = 2,
-    SensorType_PlayerFoot = 3,
-    SensorType_PlayerDecoration = 4,
-    SensorType_PlayerEye = 5,
-    SensorType_Npc = 6,
-    SensorType_Ride = 7,
-    SensorType_Enemy = 8,
-    SensorType_EnemyBody = 9,
-    SensorType_EnemyAttack = 10,
-    SensorType_MapObj = 12,
-    SensorType_Bindable = 14,
-    SensorType_Collision = 15,
-    SensorType_PlayerFireBall = 16,
-    SensorType_HoldObj = 17,
-    SensorType_LookAt = 18,
-    SensorType_BindableGoal = 19,
-    SensorType_BindableAllPlayer = 20,
-    SensorType_BindableBubbleOutScreen = 21,
-    SensorType_BindableKoura = 22,
-    SensorType_BindableRouteDokan = 23,
-    SensorType_BindableBubblePadInput = 24
-};
-
 class LiveActor;
 class HitSensor;
 class SensorMsg;
@@ -53,8 +27,8 @@ void addHitSensorEnemyBody(LiveActor*, const ActorInitInfo&, const char*, f32, u
                            const sead::Vector3f&);
 void addHitSensorEnemyAttack(LiveActor*, const ActorInitInfo&, const char*, f32, u16,
                              const sead::Vector3f&);
-void addHitSensorMapObj(LiveActor*, const ActorInitInfo&, const char*, f32, u16,
-                        const sead::Vector3f&);
+HitSensor* addHitSensorMapObj(LiveActor*, const ActorInitInfo&, const char*, f32, u16,
+                              const sead::Vector3f&);
 void addHitSensorBindable(LiveActor*, const ActorInitInfo&, const char*, f32, u16,
                           const sead::Vector3f&);
 void addHitSensorBindableGoal(LiveActor*, const ActorInitInfo&, const char*, f32, u16,
@@ -82,22 +56,22 @@ void setSensorRadius(LiveActor*, const char*, f32);
 void setSensorRadius(LiveActor*, f32);
 f32 getSensorRadius(const LiveActor*, const char*);
 f32 getSensorRadius(const LiveActor*);
-sead::Vector3f& getSensorPos(const LiveActor*, const char*);
-sead::Vector3f& getSensorPos(const LiveActor*);
+const sead::Vector3f& getSensorPos(const LiveActor*, const char*);
+const sead::Vector3f& getSensorPos(const LiveActor*);
 void setSensorFollowPosOffset(LiveActor*, const char*, const sead::Vector3f&);
 void setSensorFollowPosOffset(LiveActor*, const sead::Vector3f&);
-sead::Vector3f& getSensorFollowPosOffset(const LiveActor*, const char*);
-sead::Vector3f& getSensorFollowPosOffset(const LiveActor*);
+const sead::Vector3f& getSensorFollowPosOffset(const LiveActor*, const char*);
+const sead::Vector3f& getSensorFollowPosOffset(const LiveActor*);
 void createActorSensorController(LiveActor*, const char*);
 void setSensorRadius(ActorSensorController*, f32);
 void setSensorScale(ActorSensorController*, f32);
 void setSensorFollowPosOffset(ActorSensorController*, const sead::Vector3f&);
 f32 getOriginalSensorRadius(const ActorSensorController*);
-sead::Vector3f& getOriginalSensorFollowPosOffset(const ActorSensorController*);
+const sead::Vector3f& getOriginalSensorFollowPosOffset(const ActorSensorController*);
 void resetActorSensorController(ActorSensorController*);
 void calcPosBetweenSensors(sead::Vector3f*, const HitSensor*, const HitSensor*, f32);
 f32 calcDistance(const HitSensor*, const HitSensor*);
-sead::Vector3f& getSensorPos(const HitSensor*);
+const sead::Vector3f& getSensorPos(const HitSensor*);
 f32 calcDistanceV(const sead::Vector3f&, const HitSensor*, const HitSensor*);
 f32 calcDistanceH(const sead::Vector3f&, const HitSensor*, const HitSensor*);
 void calcDirBetweenSensors(sead::Vector3f*, const HitSensor*, const HitSensor*);
@@ -134,9 +108,9 @@ bool isHitCircleSensor(const HitSensor*, const sead::Vector3f&, const sead::Vect
 bool isHitCircleSensor(const HitSensor*, const HitSensor*, const sead::Vector3f&, f32, f32);
 bool isHitPlaneSensor(const HitSensor*, const sead::Vector3f&, const sead::Vector3f&, f32);
 bool isHitPlaneSensor(const HitSensor*, const HitSensor*, const sead::Vector3f&, f32);
-sead::Vector3f& getActorTrans(const HitSensor*);
-sead::Vector3f& getActorVelocity(const HitSensor*);
-sead::Vector3f& getActorGravity(const HitSensor*);
+const sead::Vector3f& getActorTrans(const HitSensor*);
+const sead::Vector3f& getActorVelocity(const HitSensor*);
+const sead::Vector3f& getActorGravity(const HitSensor*);
 bool isSensorName(const HitSensor*, const char*);
 bool isSensorHostName(const HitSensor*, const char*);
 bool isSensorHost(const HitSensor*, const LiveActor*);
@@ -164,10 +138,13 @@ bool isSensorPlayer(const HitSensor*);
 bool isSensorPlayerAll(const HitSensor*);
 void validateHitSensorRideAll(LiveActor*);
 bool isSensorRide(const HitSensor*);
+bool isSensorSimple(const HitSensor*);
+bool isSensorLookAt(const HitSensor*);
 void invalidateHitSensorEyeAll(LiveActor*);
 void invalidateHitSensorPlayerAll(LiveActor*);
 void invalidateHitSensorPlayerAttackAll(LiveActor*);
 bool isSensorPlayerAttack(const HitSensor*);
+bool isSensorPlayerEye(const HitSensor*);
 }  // namespace al
 
 namespace alActorSensorFunction {

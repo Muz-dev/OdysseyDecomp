@@ -15,8 +15,8 @@ namespace al {
 class ByamlIter;
 class CollisionParts;
 class HitSensor;
-class KCPrismData;
-class KCPrismHeader;
+struct KCPrismData;
+struct KCPrismHeader;
 class LiveActor;
 
 class Triangle {
@@ -48,8 +48,10 @@ public:
     const sead::Matrix34f& getBaseInvMtx() const;
     const sead::Matrix34f& getPrevBaseMtx() const;
 
+    // clang-format off
     friend bool ::operator==(const Triangle& tri1, const Triangle& tri2);
     friend bool ::operator!=(const Triangle& tri1, const Triangle& tri2);
+    // clang-format on
 
 private:
     const CollisionParts* mCollisionParts;

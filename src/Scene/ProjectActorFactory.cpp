@@ -4,6 +4,7 @@
 #include "Library/LiveActor/CreateActorFunction.h"
 #include "Library/MapObj/BackHideParts.h"
 #include "Library/MapObj/ClockMapParts.h"
+#include "Library/MapObj/ConveyerMapParts.h"
 #include "Library/MapObj/FallMapParts.h"
 #include "Library/MapObj/FixMapParts.h"
 #include "Library/MapObj/FloaterMapParts.h"
@@ -14,18 +15,49 @@
 #include "Library/MapObj/RailMoveMapParts.h"
 #include "Library/MapObj/RollingCubeMapParts.h"
 #include "Library/MapObj/RotateMapParts.h"
+#include "Library/MapObj/SeesawMapParts.h"
 #include "Library/MapObj/SlideMapParts.h"
+#include "Library/MapObj/SubActorLodMapParts.h"
 #include "Library/MapObj/SurfMapParts.h"
+#include "Library/MapObj/SwingMapParts.h"
+#include "Library/MapObj/SwitchDitherMapParts.h"
+#include "Library/MapObj/SwitchOpenMapParts.h"
+#include "Library/MapObj/VisibleSwitchMapParts.h"
+#include "Library/MapObj/WheelMapParts.h"
+#include "Library/MapObj/WobbleMapParts.h"
 #include "Library/Obj/AllDeadWatcher.h"
 
+#include "Boss/BarrierField.h"
+#include "Boss/BossForest/BossForestWander.h"
 #include "Boss/Mofumofu/MofumofuScrap.h"
+#include "Enemy/Gamane.h"
+#include "Enemy/Mummy.h"
+#include "Enemy/PackunTrace.h"
+#include "Enemy/Togezo.h"
+#include "Enemy/Togezo2D.h"
+#include "Item/Coin.h"
+#include "Item/Coin2D.h"
 #include "Item/CoinBlow.h"
+#include "Item/CoinChameleon.h"
+#include "Item/CoinCollect.h"
+#include "Item/CoinCollect2D.h"
+#include "Item/LifeMaxUpItem.h"
+#include "Item/LifeMaxUpItem2D.h"
+#include "Item/LifeUpItem.h"
+#include "Item/LifeUpItem2D.h"
 #include "MapObj/AnagramAlphabet.h"
+#include "MapObj/CapBomb.h"
 #include "MapObj/CapSwitch.h"
 #include "MapObj/ChurchDoor.h"
 #include "MapObj/CitySignal.h"
+#include "MapObj/CoinCollectHintObj.h"
+#include "MapObj/Doshi.h"
 #include "MapObj/FireDrum2D.h"
+#include "MapObj/LavaPan.h"
 #include "MapObj/MoonBasementSlideObj.h"
+#include "MapObj/PeachWorldTree.h"
+#include "MapObj/TransparentWall.h"
+#include "MapObj/VolleyballNet.h"
 #include "MapObj/WorldMapEarth.h"
 
 static al::NameToCreator<al::ActorCreatorFunction> sProjectActorFactoryEntries[] = {
@@ -43,7 +75,7 @@ static al::NameToCreator<al::ActorCreatorFunction> sProjectActorFactoryEntries[]
 #endif
     {"Barrel2D", nullptr},
     {"BarrelGenerator2D", nullptr},
-    {"BarrierField", nullptr},
+    {"BarrierField", al::createActorFunction<BarrierField>},
     {"BazookaElectric", nullptr},
     {"BendLeafTree", nullptr},
     {"BgmPlayObj", nullptr},
@@ -70,7 +102,7 @@ static al::NameToCreator<al::ActorCreatorFunction> sProjectActorFactoryEntries[]
     {"BombTail", nullptr},
     {"BossForest", nullptr},
     {"BossForestBlock", nullptr},
-    {"BossForestWander", nullptr},
+    {"BossForestWander", al::createActorFunction<BossForestWander>},
     {"BossKnuckle", nullptr},
     {"BossKnuckleCounterGround", nullptr},
     {"BossKnuckleFix", nullptr},
@@ -106,7 +138,7 @@ static al::NameToCreator<al::ActorCreatorFunction> sProjectActorFactoryEntries[]
     {"CapAcceleratorKeyMoveMapParts", nullptr},
     {"CapAppearMapParts", nullptr},
     {"CapBeamer", nullptr},
-    {"CapBomb", nullptr},
+    {"CapBomb", al::createActorFunction<CapBomb>},
     {"CapCatapult", nullptr},
     {"CapFlower", nullptr},
     {"CapFlowerGroup", nullptr},
@@ -143,15 +175,15 @@ static al::NameToCreator<al::ActorCreatorFunction> sProjectActorFactoryEntries[]
     {"CollectAnimalWatcher", nullptr},
     {"CollectBgmSpeaker", nullptr},
     {"CollectionList", nullptr},
-    {"Coin", nullptr},
-    {"Coin2D", nullptr},
+    {"Coin", al::createActorFunction<Coin>},
+    {"Coin2D", al::createActorFunction<Coin2D>},
     {"Coin2DCityDirector", nullptr},
     {"CoinBlow", al::createActorFunction<CoinBlow>},
-    {"CoinChameleon", nullptr},
+    {"CoinChameleon", al::createActorFunction<CoinChameleon>},
     {"CoinCirclePlacement", nullptr},
-    {"CoinCollect", nullptr},
-    {"CoinCollectHintObj", nullptr},
-    {"CoinCollect2D", nullptr},
+    {"CoinCollect", al::createActorFunction<CoinCollect>},
+    {"CoinCollectHintObj", al::createActorFunction<CoinCollectHintObj>},
+    {"CoinCollect2D", al::createActorFunction<CoinCollect2D>},
     {"CoinLead", nullptr},
     {"CoinRail", nullptr},
     {"CoinRing", nullptr},
@@ -182,7 +214,7 @@ static al::NameToCreator<al::ActorCreatorFunction> sProjectActorFactoryEntries[]
     {"DokanStageChange", nullptr},
     {"DonkeyKong2D", nullptr},
     {"Donsuke", nullptr},
-    {"Doshi", nullptr},
+    {"Doshi", al::createActorFunction<Doshi>},
     {"DoorAreaChange", nullptr},
     {"DoorAreaChangeCap", nullptr},
     {"DoorCity", nullptr},
@@ -232,7 +264,7 @@ static al::NameToCreator<al::ActorCreatorFunction> sProjectActorFactoryEntries[]
     {"ForestWorldFlowerCtrl", nullptr},
     {"GabuZou", nullptr},
     {"GabuZouGroup", nullptr},
-    {"Gamane", nullptr},
+    {"Gamane", al::createActorFunction<Gamane>},
     {"GiantWanderBoss", nullptr},
     {"GoalMark", nullptr},
     {"GolemClimb", nullptr},
@@ -300,12 +332,12 @@ static al::NameToCreator<al::ActorCreatorFunction> sProjectActorFactoryEntries[]
     {"KuriboWing", nullptr},
     {"LavaFryingPan", nullptr},
     {"LavaStewVeget", nullptr},
-    {"LavaPan", nullptr},
+    {"LavaPan", al::createActorFunction<LavaPan>},
     {"LavaWave", nullptr},
-    {"LifeMaxUpItem", nullptr},
-    {"LifeMaxUpItem2D", nullptr},
-    {"LifeUpItem", nullptr},
-    {"LifeUpItem2D", nullptr},
+    {"LifeMaxUpItem", al::createActorFunction<LifeMaxUpItem>},
+    {"LifeMaxUpItem2D", al::createActorFunction<LifeMaxUpItem2D>},
+    {"LifeUpItem", al::createActorFunction<LifeUpItem>},
+    {"LifeUpItem2D", al::createActorFunction<LifeUpItem2D>},
     {"LightningController", nullptr},
     {"LongGenerator", nullptr},
     {"MarchingCubeBlock", nullptr},
@@ -338,7 +370,7 @@ static al::NameToCreator<al::ActorCreatorFunction> sProjectActorFactoryEntries[]
     {"MoviePlayerMapParts", nullptr},
     {"MultiGateKeeperBonfire", nullptr},
     {"MultiGateKeeperWatcher", nullptr},
-    {"Mummy", nullptr},
+    {"Mummy", al::createActorFunction<Mummy>},
     {"MummyGenerator", nullptr},
     {"NeedleTrap", nullptr},
     {"Nokonoko2D", nullptr},
@@ -360,7 +392,7 @@ static al::NameToCreator<al::ActorCreatorFunction> sProjectActorFactoryEntries[]
     {"PeachWorldHomeCastleCap", nullptr},
     {"PeachWorldGate", nullptr},
     {"PeachWorldMoatWater", nullptr},
-    {"PeachWorldTree", nullptr},
+    {"PeachWorldTree", al::createActorFunction<PeachWorldTree>},
     {"Pecho", nullptr},
     {"Pen", nullptr},
     {"PictureStageChange", nullptr},
@@ -516,14 +548,14 @@ static al::NameToCreator<al::ActorCreatorFunction> sProjectActorFactoryEntries[]
     {"TaxiStop", nullptr},
     {"TextureReplaceScreen", nullptr},
     {"ThunderRenderRequester", nullptr},
-    {"Togezo", nullptr},
-    {"Togezo2D", nullptr},
+    {"Togezo", al::createActorFunction<Togezo>},
+    {"Togezo2D", al::createActorFunction<Togezo2D>},
     {"TokimekiMayorNpc", nullptr},
     {"TrampleBush", nullptr},
     {"TrampleSwitch", nullptr},
     {"TrampleSwitchSave", nullptr},
     {"TrampleSwitchTimer", nullptr},
-    {"TransparentWall", nullptr},
+    {"TransparentWall", al::createActorFunction<TransparentWall>},
     {"TreasureBox", nullptr},
     {"TreasureBoxKey", nullptr},
     {"TreasureBoxSequentialDirector", nullptr},
@@ -539,7 +571,7 @@ static al::NameToCreator<al::ActorCreatorFunction> sProjectActorFactoryEntries[]
     {"UtsuboWatcher", nullptr},
     {"VocalMike", nullptr},
     {"VolleyballBase", nullptr},
-    {"VolleyballNet", nullptr},
+    {"VolleyballNet", al::createActorFunction<VolleyballNet>},
     {"VolleyballNpc", nullptr},
     {"Wanwan", nullptr},
     {"WanwanHole", nullptr},
@@ -563,7 +595,7 @@ static al::NameToCreator<al::ActorCreatorFunction> sProjectActorFactoryEntries[]
     {"BreakMapParts", nullptr},
     {"CapRotateMapParts", nullptr},
     {"ClockMapParts", al::createActorFunction<al::ClockMapParts>},
-    {"ConveyerMapParts", nullptr},
+    {"ConveyerMapParts", al::createActorFunction<al::ConveyerMapParts>},
     {"FallMapParts", al::createActorFunction<al::FallMapParts>},
     {"FixMapParts", al::createActorFunction<al::FixMapParts>},
     {"FloaterMapParts", al::createActorFunction<al::FloaterMapParts>},
@@ -583,18 +615,18 @@ static al::NameToCreator<al::ActorCreatorFunction> sProjectActorFactoryEntries[]
     {"RollingCubeMapParts", al::createActorFunction<al::RollingCubeMapParts>},
     {"RippleFixMapParts", nullptr},
     {"RotateMapParts", al::createActorFunction<al::RotateMapParts>},
-    {"SeesawMapParts", nullptr},
+    {"SeesawMapParts", al::createActorFunction<al::SeesawMapParts>},
     {"SlideMapParts", al::createActorFunction<al::SlideMapParts>},
-    {"SubActorLodMapParts", nullptr},
+    {"SubActorLodMapParts", al::createActorFunction<al::SubActorLodMapParts>},
     {"SurfMapParts", al::createActorFunction<al::SurfMapParts>},
-    {"SwingMapParts", nullptr},
-    {"SwitchDitherMapParts", nullptr},
+    {"SwingMapParts", al::createActorFunction<al::SwingMapParts>},
+    {"SwitchDitherMapParts", al::createActorFunction<al::SwitchDitherMapParts>},
     {"SwitchKeepOnWatcher", nullptr},
-    {"SwitchOpenMapParts", nullptr},
-    {"VisibleSwitchMapParts", nullptr},
+    {"SwitchOpenMapParts", al::createActorFunction<al::SwitchOpenMapParts>},
+    {"VisibleSwitchMapParts", al::createActorFunction<al::VisibleSwitchMapParts>},
     {"WaveSurfMapParts", nullptr},
-    {"WheelMapParts", nullptr},
-    {"WobbleMapParts", nullptr},
+    {"WheelMapParts", al::createActorFunction<al::WheelMapParts>},
+    {"WobbleMapParts", al::createActorFunction<al::WobbleMapParts>},
     {"WindBlowMapParts", nullptr},
     {"Yoshi", nullptr},
     {"YoshiFruit", nullptr},

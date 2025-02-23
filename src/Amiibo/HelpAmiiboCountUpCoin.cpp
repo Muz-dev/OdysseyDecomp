@@ -3,10 +3,10 @@
 #include <math/seadQuat.h>
 #include <math/seadVector.h>
 
-#include "Library/LiveActor/ActorInitInfo.h"
+#include "Library/LiveActor/ActorInitUtil.h"
 #include "Library/LiveActor/ActorMovementFunction.h"
 #include "Library/LiveActor/ActorPoseKeeper.h"
-#include "Library/Math/MathRandomUtil.h"
+#include "Library/Math/MathUtil.h"
 #include "Library/Nerve/NerveSetupUtil.h"
 #include "Library/Nerve/NerveUtil.h"
 #include "Library/Nfp/NfpFunction.h"
@@ -109,7 +109,7 @@ void HelpAmiiboCountUpCoin::activate() {
 }
 
 HelpAmiiboType HelpAmiiboCountUpCoin::getType() const {
-    return HelpAmiiboType::CountUpCoin;
+    return HelpAmiiboType::All;
 }
 
 al::NerveKeeper* HelpAmiiboCountUpCoin::getNerveKeeper() const {
@@ -153,7 +153,7 @@ void HelpAmiiboCountUpCoin::exeAppearCoin() {
                          (mNumberOfCoins == 3) ? 2 :
                                                  -1;
 
-    if (mCoinsSpawned == mLastCoinIndex) {
+    if ((s32)mCoinsSpawned == mLastCoinIndex) {
         al::setNerve(this, &NrvHelpAmiiboCountUpCoin.End);
         return;
     }
