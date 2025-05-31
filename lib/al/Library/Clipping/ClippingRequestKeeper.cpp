@@ -4,9 +4,7 @@
 
 namespace al {
 
-
-
-inline ClippingRequestTable::ClippingRequestTable(s32 capacity) {
+ClippingRequestTable::ClippingRequestTable(s32 capacity) {
     mCapacity = capacity;
     mSize = 0;
     mInfo = nullptr;
