@@ -22,8 +22,8 @@ void ClippingActorInfo::setTypeToSphere(f32 radius, const sead::Vector3f* pos) {
     mClippingRadius = radius;
     if (!pos)
         pos = getTransPtr(mLiveActor);
-    mTransPtr = pos;
-    _20.setUndef();
+    mClippingCenterPos = pos;
+    mClippingObb.setUndef();
 }
 
 void ClippingActorInfo::startClipped() {
@@ -54,9 +54,9 @@ void ClippingActorInfo::updateClipping(const ClippingJudge* clippingJudge) {
 }
 
 bool ClippingActorInfo::judgeClipping(const ClippingJudge* clippingJudge) const {
-    if (!_20.isUndef())
-        return clippingJudge->isJudgedToClipFrustumObb(_18, _20, _38, _4a);
-    return clippingJudge->isJudgedToClipFrustum(*mTransPtr, mClippingRadius, _38, _4a);
+    if (!mClippingObb.isUndef())
+        return clippingJudge->isJudgedToClipFrustumObb(mClippingMtx, mClippingObb, mNearClipDistance, _4a);
+    return clippingJudge->isJudgedToClipFrustum(*mClippingCenterPos, mClippingRadius, mNearClipDistance, _4a);
 }
 
 void ClippingActorInfo::updateClipping(ClippingRequestKeeper* clippingRequestKeeper,
@@ -85,12 +85,12 @@ bool ClippingActorInfo::isGroupClippingInit() const {
     return mPlacementId->isValid();
 }
 
-void ClippingActorInfo::setTypeToObb(const sead::BoundBox3f& boundBox,
-                                     const sead::Matrix34f* matrix) {
-    if (!matrix)
-        matrix = mLiveActor->getBaseMtx();
-    _18 = matrix;
-    _20 = boundBox;
+void ClippingActorInfo::setTypeToObb(const sead::BoundBox3f& clippingObb,
+                                     const sead::Matrix34f* mtx) {
+    if (!mtx)
+        mtx = mLiveActor->getBaseMtx();
+    mClippingMtx = mtx;
+    mClippingObb = clippingObb;
 }
 
 void ClippingActorInfo::setGroupClippingId(const ActorInitInfo& clippingId) {

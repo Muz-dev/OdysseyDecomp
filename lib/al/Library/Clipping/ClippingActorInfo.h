@@ -16,7 +16,7 @@ class ViewIdHolder;
 class ClippingActorInfo {
 public:
     ClippingActorInfo(LiveActor*);
-    void setTypeToSphere(f32, const sead::Vector3f*);
+    void setTypeToSphere(f32 radius, const sead::Vector3f* pos);
     void startClipped();
     void endClipped();
     void updateClipping(const ClippingJudge*);
@@ -44,14 +44,22 @@ public:
 
     void setGroupClippingEnable(bool enable) { mIsEnableGroupClipping = enable; }
 
+    f32 getClippingRadius() const { return mClippingRadius; }
+
+    const sead::Vector3f* getClippingCenterPos() const { return mClippingCenterPos; }
+
+    const sead::BoundBox3f& getClippingObb() const { return mClippingObb; }
+
+    void setNearClipDistance(f32 distance) { mNearClipDistance = distance; }
+
     // TODO: rename unnamed member variables
 private:
     LiveActor* mLiveActor = nullptr;
-    const sead::Vector3f* mTransPtr = nullptr;
+    const sead::Vector3f* mClippingCenterPos = nullptr;
     f32 mClippingRadius = 0.0f;
-    const sead::Matrix34f* _18 = nullptr;
-    sead::BoundBox3f _20;
-    f32 _38 = 300.0f;
+    const sead::Matrix34f* mClippingMtx = nullptr;
+    sead::BoundBox3f mClippingObb;
+    f32 mNearClipDistance = 300.0f;
     PlacementId* mPlacementId = nullptr;
     s16 _48 = 1;
     s16 _4a = 1;

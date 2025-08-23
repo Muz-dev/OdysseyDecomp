@@ -22,11 +22,15 @@ public:
     void start();
     bool isDone() const;
 
+
+
 private:
     sead::DelegateThread* mDelegateThread = nullptr;
     FunctorBase* mFunctor = nullptr;
     bool mIsDone = true;
 };
+
+s32 getCurrentCoreId();
 
 static_assert(sizeof(AsyncFunctorThread) == 0x20);
 }  // namespace al

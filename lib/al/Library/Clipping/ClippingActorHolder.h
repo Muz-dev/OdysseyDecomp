@@ -1,11 +1,13 @@
 #pragma once
 
 #include <basis/seadTypes.h>
-#include <math/seadBoundBox.h>
 #include <math/seadVector.h>
+#include <math/seadBoundBox.h>
 
 namespace sead {
+class DelegateThread;
 class Thread;
+class Event;
 }
 
 namespace al {
@@ -14,6 +16,8 @@ class ClippingActorInfo;
 class ClippingGroupHolder;
 class ClippingJudge;
 class LiveActor;
+class ClippingActorInfoList;
+class ClippingRequestKeeper;
 
 class ClippingActorHolder {
 public:
@@ -43,7 +47,15 @@ public:
     void updateFarClipLevel();
 
 private:
-    void* filler[0x8];
+    s32 mClippingActorInfoSize = 0;
+    s32 mActorCount = 0;
+    ClippingActorInfoList* mClippingActorInfoList = nullptr;
+    ClippingActorInfoList* _10 = nullptr;
+    ClippingActorInfoList* _18 = nullptr;
+    ClippingActorInfoList* _20 = nullptr;
+    ClippingRequestKeeper** mClippingRequestKeepers = nullptr;
+    sead::Event** mClippingEvents = nullptr;
+    sead::DelegateThread** mDelegateThreads = nullptr;
 };
 
 }  // namespace al

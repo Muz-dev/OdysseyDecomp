@@ -15,6 +15,8 @@ public:
     ClippingActorInfo* tryFind(const LiveActor* liveActor) const;
     bool isInList(const LiveActor* liveActor) const;
 
+    s32 getClippingActorInfoCount() const { return mClippingActorInfoCount; }
+    ClippingActorInfo** getClippingActorInfos() const { return mClippingActorInfo; }
 private:
     s32 mClippingActorInfoSize = 0;
     s32 mClippingActorInfoCount = 0;
