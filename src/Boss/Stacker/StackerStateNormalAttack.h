@@ -1,4 +1,7 @@
 #pragma once
+
+#include <math/seadMatrix.h>
+
 #include "Library/Nerve/NerveStateBase.h"
 
 namespace al {
@@ -25,10 +28,24 @@ public:
     void exeAttackSuccess();
     void exeAttackSign();
     void exeAttack();
+    void exeAttackEnd();
     void exeSwoonStart();
     void exeSwoon();
     void exeSwoonEnd();
     void exeSwoonReaction();
     void exeBounce();
     void exePress();
+private:
+    Stacker* mStacker;
+    void* buf;
+    f64 _30;
+    s32 _38;
+    s32 _3c;
+    s32 _40;
+    s32 _44;
+    f32 _48;
+    f32 _4c;
+    u16 _50;
+    sead::Matrix34f mMtx;
+
 };
