@@ -34,4 +34,10 @@ public:
     void exeInvincibleAttack();
     void exeReset();
     void exeDemoBattleEnd();
+
+    f32 get_154() const { return _154; }
+
+private:
+    void* buf[0xa];
+    f32 _154;
 };
