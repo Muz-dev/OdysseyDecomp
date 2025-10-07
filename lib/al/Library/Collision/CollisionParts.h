@@ -18,6 +18,9 @@ public:
     void calcForceRotatePower(sead::Quatf*) const;
     void initParts(const sead::Matrix34f&);
     void invalidateBySystem();
+    void updateBoundingSphereRange();
+    void invalidateByUser();
+    void validateByUser();
 
     const sead::Matrix34f& getBaseMtx() const { return mBaseMtx; }
 
