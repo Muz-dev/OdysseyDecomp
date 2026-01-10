@@ -50,4 +50,10 @@ private:
 
 static_assert(sizeof(LayoutKit) == 0x30);
 
+
+class LayoutSystem {
+public:
+    LayoutSystem();
+};
+
 }  // namespace al

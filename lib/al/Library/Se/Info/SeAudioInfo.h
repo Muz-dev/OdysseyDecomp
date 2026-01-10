@@ -8,7 +8,7 @@ template <typename T>
 class AudioInfoListWithParts;
 class ByamlIter;
 class SeActionInfo;
-class SeEmitterInfo;
+struct SeEmitterInfo;
 class SeHitReactionInfo;
 class SePlayInfo;
 
@@ -24,7 +24,7 @@ struct SeUserInfo {
 
     const char* name;
     bool isPartsUser = false;
-    sead::PtrArray<const char*> partsUserNameList;
+    sead::PtrArray<SeEmitterInfo> partsUserNameList;
     AudioInfoListWithParts<SeEmitterInfo>* emitterInfoList;
     AudioInfoListWithParts<SeActionInfo>* actionInfoList;
     AudioInfoListWithParts<SePlayInfo>* playInfoList;

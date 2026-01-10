@@ -4,6 +4,7 @@
 #include <math/seadMatrix.h>
 
 #include "Library/Effect/EffectSystemInfo.h"
+#include "Util/ObjUtil.h"
 
 namespace agl {
 class DrawContext;
@@ -81,6 +82,8 @@ public:
 
     const EffectSystemInfo* getEffectSystemInfo() const { return &mEffectSystemInfo; }
 
+    void setMaterialCodePrefix(CollisionCodeList* collisionCodeList) { mMaterialCodePrefix = collisionCodeList; }
+
 private:
     sead::Heap* mHeap;
     EffectSystemInfo mEffectSystemInfo;
@@ -94,14 +97,16 @@ private:
     bool _68;
     bool _69;
     bool _6a;
-    void* filler2[99];
+    void* filler2[12];
+    CollisionCodeList* mMaterialCodePrefix;
+    void* filler3[86];
     s32 mEffectLayoutDrawerSize;
     EffectLayoutDrawer** mEffectLayoutDrawerList;
     EffectShaderHolder* mEffectShaderHolder;
-    void* filler3[4];
+    void* filler4[4];
     agl::DrawContext* mDrawContext;
     EffectEnvParam* mEffectEnvParam;
-    void* filler4;
+    void* filler5;
 };
 
 static_assert(sizeof(EffectSystem) == 0x3d8);

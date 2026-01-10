@@ -7,7 +7,7 @@ namespace al {
 template <typename T>
 class AudioInfoListWithParts;
 struct AudioSystemInfo;
-class SeEmitterInfo;
+struct SeEmitterInfo;
 class SeInterpolateTypeId;
 class SePlayInfo;
 class SeResourceSpecificInfo;

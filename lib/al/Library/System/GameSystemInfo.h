@@ -35,7 +35,7 @@ struct GameSystemInfo {
     FontHolder* fontHolder;
     NfpDirector* nfpDirector;
     HtmlViewer* htmlViewer;
-    ApplicationMessageReceiver* applicationMessageReciever;
+    ApplicationMessageReceiver* applicationMessageReceiver;
     WaveVibrationHolder* waveVibrationHolder;
 };
 
