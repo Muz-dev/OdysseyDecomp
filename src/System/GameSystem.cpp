@@ -302,7 +302,7 @@ bool GameSystem::tryChangeSequence(const char* name) {
             static_cast<HakoniwaSequence*>(mSequence)->getGameDataHolder();
         gameDataHolder->setSeparatePlay(mIsSinglePlay);
         if (mIsSequenceSetupIncomplete) {
-            gameDataHolder->setGameConfigData(mGameConfigData);
+            *gameDataHolder->getGameConfigData() = *mGameConfigData;
             mIsSequenceSetupIncomplete = false;
         }
     }

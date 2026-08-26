@@ -4,6 +4,7 @@
 #include <math/seadVector.h>
 #include <prim/seadSafeString.h>
 
+#include "GameConfigData.h"
 #include "Library/HostIO/HioNode.h"
 #include "Library/Message/IUseMessageSystem.h"
 #include "Library/Scene/GameDataHolderBase.h"
@@ -28,7 +29,6 @@ class CapMessageBossData;
 class ChangeStageInfo;
 class Coin;
 class GameDataFile;
-class GameConfigData;
 class GameSequenceInfo;
 class MapDataHolder;
 class QuestInfoHolder;
@@ -288,8 +288,6 @@ public:
     GameSequenceInfo* getSequenceInfo() const { return mSequenceInfo; }
 
     GameConfigData* getGameConfigData() const { return mGameConfigData; }
-
-    void setGameConfigData(GameConfigData* data) { mGameConfigData = data; }
 
     SaveDataAccessSequence* getSaveDataAccessSequence() const { return mSaveDataAccessSequence; }
 
