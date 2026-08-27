@@ -30,6 +30,7 @@ class ChangeStageInfo;
 class Coin;
 class GameDataFile;
 class GameSequenceInfo;
+class GameConfigData;
 class MapDataHolder;
 class QuestInfoHolder;
 class SaveDataAccessSequence;
