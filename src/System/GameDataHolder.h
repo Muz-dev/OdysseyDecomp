@@ -4,13 +4,13 @@
 #include <math/seadVector.h>
 #include <prim/seadSafeString.h>
 
-#include "GameConfigData.h"
 #include "Library/HostIO/HioNode.h"
 #include "Library/Message/IUseMessageSystem.h"
 #include "Library/Scene/GameDataHolderBase.h"
 #include "Library/Scene/ISceneObj.h"
 
 #include "Scene/SceneObjFactory.h"
+#include "System/GameDataHolder.h"
 
 namespace al {
 class PlacementId;
